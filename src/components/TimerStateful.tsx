@@ -8,13 +8,63 @@ export default function TimerStateful() {
     intervals: [
       {
         name: "Walking",
+        text: "5-6 km/h",
         color: "green",
-        totalSeconds: 3,
+        totalSeconds: 60,
       },
       {
-        name: "Running",
+        name: "Warm Up",
+        text: "8-9 km/h",
+        color: "yellow",
+        totalSeconds: 120,
+      },
+      {
+        name: "First Interval",
+        text: "11-12 km/h",
+        color: "orange",
+        totalSeconds: 180,
+      },
+      {
+        name: "Rest",
+        text: "8-9 km/h",
+        color: "yellow",
+        totalSeconds: 120,
+      },
+      {
+        name: "Second Interval",
+        text: "11-12 km/h",
+        color: "orange",
+        totalSeconds: 360,
+      },
+      {
+        name: "Rest",
+        text: "8-9 km/h",
+        color: "yellow",
+        totalSeconds: 120,
+      },
+      {
+        name: "Third Interval",
+        text: "11-12 km/h",
+        color: "orange",
+        totalSeconds: 180,
+      },
+      {
+        name: "Sprint",
+        text: "12-13 km/h",
         color: "red",
-        totalSeconds: 5,
+        totalSeconds: 60,
+      },
+      {
+        name: "Wind Down",
+        text: "8-9 km/h",
+        color: "orange",
+        totalSeconds: 180,
+      },
+      {
+        name: "Walking",
+        text: "5-6 km/h",
+        color: "green",
+        totalSeconds: 120,
       },
     ],
   } as Timer);

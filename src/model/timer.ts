@@ -4,6 +4,7 @@ export interface Timer {
 
 export interface Interval {
   name: string;
+  text: string;
   color: string;
   totalSeconds: number;
 }

@@ -1,6 +1,6 @@
 "use client";
 import { Interval } from "@/model/timer";
-import { Heading, VStack } from "@chakra-ui/react";
+import { Heading, Text, VStack } from "@chakra-ui/react";
 import Countdown from "./Countdown";
 import ToggleCountdown from "./ToggleCountdown";
 import { useEffect, useState } from "react";
@@ -22,7 +22,10 @@ export default function IntervalActiveView({
   }, [setActive, setRemainingSeconds, interval]);
   return (
     <VStack gap={4}>
-      <Heading size="5xl">{interval.name}</Heading>
+      <Heading size="5xl" textAlign="center">
+        {interval.name}
+      </Heading>
+      <Text fontSize="2xl">{interval.text ?? ""}</Text>
       <Countdown
         active={active}
         currentSeconds={remainingSeconds}
