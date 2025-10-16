@@ -1,10 +1,8 @@
-"use client";
 import TimerView from "@/components/Timer";
 import { Timer } from "@/model/timer";
-import { useState } from "react";
 
 export default function TimerStateful() {
-  const [timer, setTimer] = useState({
+  const timer = {
     intervals: [
       {
         name: "Walking",
@@ -67,6 +65,6 @@ export default function TimerStateful() {
         totalSeconds: 120,
       },
     ],
-  } as Timer);
-  return <TimerView timer={timer} onUpdate={setTimer} />;
+  } as Timer;
+  return <TimerView timer={timer} />;
 }

@@ -6,13 +6,7 @@ import NextInterval from "./NextInterval";
 import EndState from "./EndState";
 import { useState } from "react";
 
-export default function TimerView({
-  timer,
-  onUpdate,
-}: {
-  timer: Timer;
-  onUpdate: (timer: Timer) => void;
-}) {
+export default function TimerView({ timer }: { timer: Timer }) {
   const [activeIntervalIndex, setActiveIntervalIndex] = useState(0);
   const activeInterval = timer.intervals[activeIntervalIndex];
   const nextInterval = !!activeInterval
