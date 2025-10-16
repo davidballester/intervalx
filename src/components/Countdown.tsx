@@ -66,7 +66,7 @@ function CountdownText({
   children: ReactNode;
 }) {
   return (
-    <Text textStyle="7xl" color={color}>
+    <Text textStyle="7xl" color={color} fontFamily="monospace">
       {children}
     </Text>
   );
