@@ -13,13 +13,11 @@ export default function IntervalActiveView({
   onFinished: () => void;
 }) {
   const [active, setActive] = useState(true);
-  const [remainingSeconds, setRemainingSeconds] = useState(
-    interval.totalSeconds
-  );
+  const [remainingMs, setRemainingMs] = useState(interval.totalSeconds * 1e3);
   useEffect(() => {
     setActive(true);
-    setRemainingSeconds(interval.totalSeconds);
-  }, [setActive, setRemainingSeconds, interval]);
+    setRemainingMs(interval.totalSeconds * 1e3);
+  }, [setActive, setRemainingMs, interval]);
   return (
     <VStack gap={4}>
       <Heading size="5xl" textAlign="center">
@@ -28,12 +26,12 @@ export default function IntervalActiveView({
       <Text fontSize="2xl">{interval.text ?? ""}</Text>
       <Countdown
         active={active}
-        currentSeconds={remainingSeconds}
+        currentSeconds={Math.ceil(remainingMs / 1e3)}
         color={interval.color}
-        onTick={() => {
-          const newRemainingSeconds = Math.max(0, remainingSeconds - 1);
-          setRemainingSeconds(newRemainingSeconds);
-          if (newRemainingSeconds <= 0) {
+        onTick={(elapsedMs) => {
+          const newRemainingMs = Math.max(0, remainingMs - elapsedMs);
+          setRemainingMs(newRemainingMs);
+          if (newRemainingMs <= 0) {
             onFinished();
           }
         }}

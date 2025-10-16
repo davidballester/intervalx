@@ -1,5 +1,8 @@
+"use client";
 import { Grid, GridItem, Text } from "@chakra-ui/react";
-import { ReactNode, useEffect } from "react";
+import { ReactNode, useEffect, useState } from "react";
+
+const INTERVAL = 100;
 
 export default function Countdown({
   active,
@@ -10,19 +13,27 @@ export default function Countdown({
   active: boolean;
   currentSeconds: number;
   color: string;
-  onTick: () => void;
+  onTick: (elapsedMs: number) => void;
 }) {
-  const minutes = Math.floor(currentSeconds / 60);
-  const seconds = currentSeconds % 60;
+  const [lastTickTimestamp, setLastTickTimestamp] = useState<number | null>(
+    null
+  );
   useEffect(() => {
-    const interval = setInterval(() => {
+    const interval = setTimeout(() => {
       if (!active) {
         return;
       }
-      onTick();
-    }, 1e3);
+      const now = Date.now();
+      const elapsedMs =
+        lastTickTimestamp == null ? INTERVAL : now - lastTickTimestamp;
+      setLastTickTimestamp(now);
+      onTick(elapsedMs);
+    }, INTERVAL);
     return () => clearInterval(interval);
-  }, [onTick]);
+  }, [currentSeconds, onTick]);
+  useEffect(() => {
+    setLastTickTimestamp(active ? Date.now() : null);
+  }, [active, setLastTickTimestamp]);
   return (
     <Grid
       templateRows="repeat(1, 1fr)"
@@ -32,7 +43,7 @@ export default function Countdown({
     >
       <GridItem>
         <CountdownText color={color}>
-          {String(minutes).padStart(2, "0")}
+          {String(Math.floor(currentSeconds / 60)).padStart(2, "0")}
         </CountdownText>
       </GridItem>
       <GridItem>
@@ -40,7 +51,7 @@ export default function Countdown({
       </GridItem>
       <GridItem>
         <CountdownText color={color}>
-          {String(seconds).padStart(2, "0")}
+          {String(currentSeconds % 60).padStart(2, "0")}
         </CountdownText>
       </GridItem>
     </Grid>
