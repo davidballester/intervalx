@@ -16,6 +16,7 @@ export default function TimerView({ timer }: { timer: Timer }) {
     <VStack gap={6} minH="vh" pr="9" pl="9" pb="12" pt="12">
       {activeInterval ? (
         <IntervalView
+          isFirstInterval={activeIntervalIndex === 0}
           interval={activeInterval}
           onFinished={() => {
             setActiveIntervalIndex(activeIntervalIndex + 1);

@@ -6,16 +6,20 @@ import ToggleCountdown from "./ToggleCountdown";
 import { useEffect, useState } from "react";
 
 export default function IntervalActiveView({
+  isFirstInterval,
   interval,
   onFinished,
 }: {
+  isFirstInterval: boolean;
   interval: Interval;
   onFinished: () => void;
 }) {
-  const [active, setActive] = useState(true);
+  const [active, setActive] = useState(false);
   const [remainingMs, setRemainingMs] = useState(interval.totalSeconds * 1e3);
   useEffect(() => {
-    setActive(true);
+    if (!isFirstInterval) {
+      setActive(true);
+    }
     setRemainingMs(interval.totalSeconds * 1e3);
   }, [setActive, setRemainingMs, interval]);
   return (
