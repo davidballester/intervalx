@@ -5,6 +5,7 @@ import IntervalView from "./Interval";
 import NextInterval from "./NextInterval";
 import EndState from "./EndState";
 import { useState } from "react";
+import { ringBell } from "@/services/bell";
 
 export default function TimerView({ timer }: { timer: Timer }) {
   const [activeIntervalIndex, setActiveIntervalIndex] = useState(0);
@@ -19,6 +20,7 @@ export default function TimerView({ timer }: { timer: Timer }) {
           isFirstInterval={activeIntervalIndex === 0}
           interval={activeInterval}
           onFinished={() => {
+            ringBell();
             setActiveIntervalIndex(activeIntervalIndex + 1);
           }}
         />
